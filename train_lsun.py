@@ -66,6 +66,8 @@ def train():
     
     saver = tf.train.Saver()
 
+    sample_z = np.random.uniform(-1, 1, 
+                [FLAGS.batch_size, FLAGS.z_dim]).astype(np.float32)
     for step in xrange(1, FLAGS.max_steps+1):
       batch_z = np.random.uniform(-1, 1, 
                   [FLAGS.batch_size, FLAGS.z_dim]).astype(np.float32)
@@ -82,13 +84,13 @@ def train():
 
       if np.mod(step, 1000) == 0:
         samples = sess.run(sampler, 
-          feed_dict={random_z: batch_z})
+          feed_dict={random_z: sample_z})
         save_images(samples, [8, 8],
             './samples/train_{:d}.bmp'.format(step))
                             
         #      if step % 1000 == 0:
         #        summary_str = sess.run(summary_op, 
-        #            feed_dict={random_z: batch_z})
+        #            feed_dict={random_z: sample_z})
         #        summary_writer.add_summary(summary_str, step)
 
       if step % 10000 == 0:
