@@ -86,7 +86,7 @@ def train():
         samples = sess.run(sampler, 
           feed_dict={random_z: sample_z})
         save_images(samples, [8, 8],
-            './samples/train_{:d}.bmp'.format(step))
+            './samples/train_{:d}.png'.format(step))
                             
         #      if step % 1000 == 0:
         #        summary_str = sess.run(summary_op, 
